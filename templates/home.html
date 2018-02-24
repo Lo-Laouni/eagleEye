@@ -1,0 +1,79 @@
+{% extends "bootstrap/base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='headerBar.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='sidenav.css')}}">
+{% endblock %}
+
+{% block title %}
+Eagle Eye | Home
+{% endblock %}
+
+
+{% block navbar %}
+<div class="header">
+  <a href="#default" class="logo">CompanyLogo</a>
+  <div class="navbar-header navbar-right">
+          <ul class="nav navbar-nav">
+              <p class="navbar-text">Hello {{ name }}</p>
+              <li><a href=""><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a> </li>
+          </ul>
+  </div>
+</div>
+<div class="container-fluid" role="navigation" id="navtabs">
+  <ul class="nav nav-tabs nav-justified" role="tablist">
+      <li class="active" role="presentation"><a data-toggle="tab" href="#home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> HOME</a></li>
+      <li role="presentation"><a href="{{ url_for('devInfo') }}"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> DEVICE INFORMATION</a></li>
+      <li role="presentation"><a href="{{ url_for('devData') }}"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> DEVICE DATA</a></li>
+      <li role="presentation"><a href="{{ url_for('devOp') }}"><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span> DEVICE OPERATIONS</a></li>
+      <li role="presentation"><a href="{{ url_for('devConfig') }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> DEVICE CONFIGURATIONS</a></li>
+  </ul>
+</div>
+<div class="col-sm-12">
+    <form class="navbar-form navbar-right">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+        </button>
+    </form>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="col-sm-12">
+    <table class="table table-hover table-responsive ">
+      <thead>
+        <tr class="active">
+          <th>#</th>
+          <th>First</th>
+          <th>Last</th>
+          <th>Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+</table>
+</div>
+{% endblock %}
+

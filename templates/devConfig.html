@@ -1,0 +1,72 @@
+{% extends "bootstrap/base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='headerBar.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='navSide.css')}}">
+{% endblock %}
+
+{% block title %}
+Eagle Eye | device Configs
+{% endblock %}
+
+
+{% block navbar %}
+<div class="header">
+  <a href="#default" class="logo">CompanyLogo</a>
+  <div class="navbar-header navbar-right">
+          <ul class="nav navbar-nav">
+              <p class="navbar-text">Hello {{ name }}</p>
+              <li><a href=""><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a> </li>
+          </ul>
+  </div>
+</div>
+<div class="container-fluid" role="navigation" id="navtabs">
+  <ul class="nav nav-tabs nav-justified" role="tablist">
+      <li role="presentation"><a href="{{ url_for('home') }}"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> HOME</a></li>
+      <li role="presentation"><a href="{{ url_for('devInfo') }}"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> DEVICE INFORMATION</a></li>
+      <li role="presentation"><a href="{{ url_for('devData') }}"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> DEVICE DATA</a></li>
+      <li role="presentation"><a href="{{ url_for('devOp') }}"><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span> DEVICE OPERATIONS</a></li>
+      <li class="active" role="presentation"><a href="{{ url_for('devConfig') }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> DEVICE CONFIGURATIONS</a></li>
+  </ul>
+</div>
+<div class="col-sm-12">
+    <form class="navbar-form navbar-right">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+        </button>
+    </form>
+</div>
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+	<div class="col-sm-2">
+        <nav class="nav-sidebar">
+            <ul class="nav tabs">
+              <li role="presentation" class="active"><a href="#decomm" aria-controls="decomm" role="tab" data-toggle="tab">Decommmission</a></li>
+              <li role="presentation"><a href="#config1" aria-controls="config1" role="tab" data-toggle="tab">Config_1</a></li>
+              <li role="presentation"><a href="#config2" aria-controls="config2" role="tab" data-toggle="tab">Config_2</a></li>
+            </ul>
+        </nav>
+	</div>
+    <div class="col-sm-10">
+        <section>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" role="tabpanel" id="decomm">
+                    <h1>DECOMMISSION</h1>
+                </div>
+                <div class="tab-pane fade" role="tabpanel" id="config1">
+                    <h1>CONFIG_1</h1>
+                </div>
+                <div class="tab-pane fade" role="tabpanel" id="config2">
+                    <h1>CONFIG_2</h1>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}
+
