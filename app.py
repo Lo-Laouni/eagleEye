@@ -20,7 +20,10 @@ loginManager.login_view = 'login'
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    devices = list(deviceTable.query.all())
+    devicesCount = len(devices)
+    print devices
+    return render_template('home.html', dev=devices, count=devicesCount)
 
 
 @app.route('/info')
@@ -81,6 +84,40 @@ class adminTable(UserMixin, db.Model):
     def __init__(self, username, password):
         self.username = username
         self.password = password
+
+
+class deviceTable(db.Model):
+    __tablename__='devices'
+    instanceID = db.Column('InstanceID', primary_key=True)
+    device = db.Column('device', nullable=False)
+    model = db.Column('model', nullable=False)
+    product = db.Column('product', nullable=False)
+    brand = db.Column('brand', nullable=False)
+    id = db.Column('device_Id', nullable=False)
+    phoneType = db.Column('phone_Type', nullable=False)
+    dataState = db.Column('data_State', nullable=False)
+    softVersion = db.Column('software_Version', nullable=False)
+    simState = db.Column('sim_State', nullable=False)
+    simOperations = db.Column('sim_Operations', nullable=False)
+    simSN = db.Column('sim_SN', nullable=False)
+    subscriberID = db.Column('subscriber_ID', nullable=False)
+    wifiState = db.Column('wifi_State', nullable=False)
+
+    def __init__(self, instanceId, device, model, product, brand, id, phoneType, dataState, softVersion, simState, simOperations, simSN, subsciberId, wifiState):
+        self.instanceID = instanceId
+        self.device = device
+        self.model = model
+        self.product = product
+        self.brand = brand
+        self.id = id
+        self.phoneType = phoneType
+        self.dataState = dataState
+        self.softVersion = softVersion
+        self.simState = simState
+        self.simOperations = simOperations
+        self.simSN = simSN
+        self.subscriberID =subsciberId
+        self.wifiState = wifiState
 
 
 @loginManager.user_loader
