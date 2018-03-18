@@ -20,30 +20,36 @@ loginManager.login_view = 'login'
 
 @app.route('/home')
 def home():
-    devices = list(deviceTable.query.all())
-    devicesCount = len(devices)
-    print devices
-    return render_template('home.html', dev=devices, count=devicesCount)
+    devices = deviceTable.query.with_entities(deviceTable)
+    devicesCount = devices.count()
+    print devices, devicesCount
+    return render_template('home.html', dev=devices, count=devicesCount, name=current_user.id)
 
 
 @app.route('/info')
 def devInfo():
-    return render_template('devInfo.html')
+    deviceInit = deviceTable.query.with_entities(deviceTable.instanceID, deviceTable.device, deviceTable.model, deviceTable.product, deviceTable.brand, deviceTable.id)
+    count1 = deviceInit.count()
+    deviceState = deviceTable.query.with_entities(deviceTable.instanceID, deviceTable.phoneType, deviceTable.dataState, deviceTable.softVersion, deviceTable.simState, deviceTable.simOperations, deviceTable.simSN, deviceTable.subscriberID, deviceTable.wifiState)
+    count2 = deviceState.count()
+    return render_template('devInfo.html', dev1=deviceInit, dev2=deviceState, count1=count1, count2=count2, name=current_user.id)
 
 
 @app.route('/data')
 def devData():
-    return render_template('devData.html')
+    devId = deviceTable.query.with_entities(deviceTable.instanceID)
+    count = devId.count()
+    return render_template('devData.html', name=current_user.id, devsId=devId, count=count)
 
 
 @app.route('/operations')
 def devOp():
-    return render_template('devOp.html')
+    return render_template('devOp.html', name=current_user.id)
 
 
 @app.route('/configs')
 def devConfig():
-    return render_template('devConfig.html')
+    return render_template('devConfig.html', name=current_user.id)
 
 
 @app.route('/')

