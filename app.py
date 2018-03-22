@@ -44,7 +44,9 @@ def devData():
 
 @app.route('/operations')
 def devOp():
-    return render_template('devOp.html', name=current_user.id)
+    devId = deviceTable.query.with_entities(deviceTable.instanceID)
+    count = devId.count()
+    return render_template('devOp.html', name=current_user.id, devsId=devId, count=count)
 
 
 @app.route('/configs')

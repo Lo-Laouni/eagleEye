@@ -2,3 +2,43 @@
     position: absolute;
     right: 0px;
 }
+
+#senderDev{
+    float:left;
+
+}
+#recipient{
+    float:left;
+    clear:left;
+}
+
+#messageIn{
+    float:left;
+    clear:left;
+}
+
+#senderDev2{
+    float:left;
+    clear:left;}
+
+#number{
+    float:left;
+    clear:left;}
+
+#date{
+    float:left;
+    clear:left;}
+
+#duration{
+    float:left;
+    clear:left;}
+#calltype{
+    float:left;
+    clear:left;}
+#callAck{
+    float:left;
+    clear:left;}
+#execute{
+    float:left;
+    clear:left;
+}
