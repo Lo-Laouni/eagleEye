@@ -58,10 +58,10 @@ Eagle Sight | device data
         <section>
             <div class="tab-content">
                 <div class="tab-pane fade in active" role="tabpanel" id="readContacts">
-                    <form class="col-sm-4">
+                    <form class="col-sm-4" action="{{url_for('devData')}}" method="post">
                         <div class="form-group">
                           <label for="sel1">Select Device:</label>
-                          <select class="form-control" id="sel1">
+                          <select class="form-control" id="sel1" name="readcontacts">
                             {% for row in range(count) %}
                               <option>{{ devsId[row][0] }}</option>
                             {% endfor %}
@@ -77,10 +77,10 @@ Eagle Sight | device data
                     </div>
                 </div>
                 <div class="tab-pane fade" role="tabpanel" id="readCallLogs">
-                    <form class="col-sm-4">
+                    <form class="col-sm-4" action="{{url_for('devData')}}" method="post">
                         <div class="form-group">
                           <label for="sel2">Select Device:</label>
-                          <select class="form-control" id="sel2">
+                          <select class="form-control" id="sel2" name="readCallog">
                             {% for row in range(count) %}
                               <option>{{ devsId[row][0] }}</option>
                             {% endfor %}
@@ -96,10 +96,10 @@ Eagle Sight | device data
                     </div>
                 </div>
                 <div class="tab-pane fade" role="tabpanel" id="readSms">
-                    <form class="col-sm-4">
+                    <form class="col-sm-4" action="{{url_for('devData')}}" method="post">
                         <div class="form-group">
                           <label for="sel3">Select Device:</label>
-                          <select class="form-control" id="sel3">
+                          <select class="form-control" id="sel3" name="readSMS">
                             {% for row in range(count) %}
                               <option>{{ devsId[row][0] }}</option>
                             {% endfor %}

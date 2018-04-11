@@ -36,10 +36,24 @@ def devInfo():
     return render_template('devInfo.html', dev1=deviceInit, dev2=deviceState, count1=count1, count2=count2, name=current_user.id)
 
 
-@app.route('/data')
+@app.route('/data', methods=['GET', 'POST'])
 def devData():
     devId = deviceTable.query.with_entities(deviceTable.instanceID)
     count = devId.count()
+    if request.method == 'POST':
+        if request.form['readcontacts']:
+            device = request.form['readcontacts']
+            device_token = ""  # need to retrieve device token from database
+            dataMessage = {"readcontacts": device}
+        elif request.form['readCallog']:
+            device = request.form['readCallog']
+            device_token = ""  # need to retrieve device token from database
+            dataMessage = {"readCallog": device}
+        else:
+            device = request.form['readSMS']
+            device_token = ""  # need to retrieve device token from database
+            dataMessage = {"readSMS": device}
+        firebase(device_token, dataMessage)
     return render_template('devData.html', name=current_user.id, devsId=devId, count=count)
 
 
