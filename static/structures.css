@@ -40,5 +40,20 @@
     clear:left;}
 #execute{
     float:left;
-    clear:left;
+    clear:left;}
+/*}
+table{
+    overflow-y:scroll;
+}*/
+
+div.config{
+    border-top: 5px solid #337ab7;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    height: 400px;
+
 }
+.body{
+    background-color: #3aafa9;
+    height: 100%; }
+

@@ -7,13 +7,14 @@ body {
 
 .header {
   overflow: hidden;
-  background-color: #f1f1f1;
-  padding: 20px 10px;
+  background-color: #17252a;
+  padding: 0px;
+  height:100px;
 }
 
 .header a {
   float: left;
-  color: black;
+  color: #3aafa9;
   text-align: center;
   padding: 12px;
   text-decoration: none;
@@ -31,9 +32,10 @@ body {
   background-color: #ddd;
   color: black;
 }
+.header p{ color:#3aafa9;}
 
 .nav.navbar li>a:hover{
-  background-color: #ed2323;
+  background-color: #3aafa9;
   color: black;
 }
 
@@ -53,3 +55,5 @@ body {
     float: none;
   }
 }
+.logo{ margin-top:20px;}
+.navbar-header.navbar-right{ margin-top:20px;}

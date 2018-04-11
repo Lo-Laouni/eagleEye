@@ -4,6 +4,7 @@
 {{super()}}
 <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='headerBar.css')}}">
 <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='navSide.css')}}">
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='structures.css')}}">
 {% endblock %}
 
 {% block title %}
@@ -43,29 +44,40 @@ Eagle Eye | device Configs
 {% endblock %}
 {% block content %}
 <div class="container-fluid">
-	<div class="col-sm-2">
-        <nav class="nav-sidebar">
-            <ul class="nav tabs">
-              <li role="presentation" class="active"><a href="#decomm" aria-controls="decomm" role="tab" data-toggle="tab">Decommmission</a></li>
-              <li role="presentation"><a href="#config1" aria-controls="config1" role="tab" data-toggle="tab">Config_1</a></li>
-              <li role="presentation"><a href="#config2" aria-controls="config2" role="tab" data-toggle="tab">Config_2</a></li>
-            </ul>
-        </nav>
-	</div>
-    <div class="col-sm-10">
-        <section>
-            <div class="tab-content">
-                <div class="tab-pane fade in active" role="tabpanel" id="decomm">
-                    <h1>DECOMMISSION</h1>
-                </div>
-                <div class="tab-pane fade" role="tabpanel" id="config1">
-                    <h1>CONFIG_1</h1>
-                </div>
-                <div class="tab-pane fade" role="tabpanel" id="config2">
-                    <h1>CONFIG_2</h1>
-                </div>
-            </div>
-        </section>
+    <div class="config col-sm-4" id="wifistate">
+        <h2>Wifi State</h2>
+        <label for="sel3">Select device:</label>
+        <select class="form-control" id="sel3">
+            {% for row in range(count) %}
+            <option>{{ devsId[row][0] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <input type="button" class="btn btn-primary" value="Check">
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="config col-sm-3" id="decomm">
+        <h2>Decommission</h2>
+        <label for="sel2">Select device:</label>
+        <select class="form-control" id="sel2">
+            {% for row in range(count) %}
+            <option>{{ devsId[row][0] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <input type="button" class="btn btn-primary" value="Decommission">
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="config col-sm-3" id="datastate">
+         <h2>Wifi State</h2>
+        <label for="sel1">Select device:</label>
+        <select class="form-control" id="sel1">
+            {% for row in range(count) %}
+            <option>{{ devsId[row][0] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <input type="button" class="btn btn-primary" value="Check">
     </div>
 </div>
 {% endblock %}

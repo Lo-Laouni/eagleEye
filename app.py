@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request,redirect
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
+from pyfcm import FCMNotification
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -22,7 +23,7 @@ loginManager.login_view = 'login'
 def home():
     devices = deviceTable.query.with_entities(deviceTable)
     devicesCount = devices.count()
-    print devices, devicesCount
+    print type(devices), devicesCount
     return render_template('home.html', dev=devices, count=devicesCount, name=current_user.id)
 
 
@@ -51,7 +52,9 @@ def devOp():
 
 @app.route('/configs')
 def devConfig():
-    return render_template('devConfig.html', name=current_user.id)
+    devId = deviceTable.query.with_entities(deviceTable.instanceID)
+    count = devId.count()
+    return render_template('devConfig.html', name=current_user.id, devsId=devId, count=count)
 
 
 @app.route('/')
@@ -131,6 +134,14 @@ class deviceTable(db.Model):
 @loginManager.user_loader
 def load_user(user_id):
     return adminTable.query.get(str(user_id))
+
+
+def firebase(registrationId, dataMessage):
+    push_service = FCMNotification(api_key="AIzaSyDNvYj9Is5cOkuH7XJCRqW1zcMxOx2azr0")
+    registrationID = registrationId
+    dataMessage = dataMessage
+
+    result = push_service.single_device_data_message(registration_id=registrationID, data_message=dataMessage)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -3,11 +3,11 @@
 {% block styles %}
 {{super()}}
 <link rel="stylesheet" href="{{url_for('static', filename='headerBar.css')}}">
-<link rel="stylesheet" href="{{url_for('static', filename='sidenav.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='structures.css')}}">
 {% endblock %}
 
 {% block title %}
-Eagle Eye | Home
+Eagle Sight | Home
 {% endblock %}
 
 
@@ -30,49 +30,52 @@ Eagle Eye | Home
       <li role="presentation"><a href="{{ url_for('devConfig') }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> DEVICE CONFIGURATIONS</a></li>
   </ul>
 </div>
-<div class="col-sm-12">
-    <form class="navbar-form navbar-right">
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button class="btn btn-default" type="button">
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-        </button>
-    </form>
-</div>
-{% endblock %}
+<div class="body col-sm-12">
+    <div class="col-sm-12">
+        <form class="navbar-form navbar-right">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+        </form>
+    </div>
+    {% endblock %}
 
-{% block content %}
-<div class="col-sm-12" style="overflow-x:auto;">
-    <table class="table table-hover table-responsive">
-      <thead>
-        <tr class="active">
-            <th>Instance ID</th>
-            <th>Device</th>
-            <th>Model</th>
-            <th>Product</th>
-            <th>Brand</th>
-            <th>ID</th>
-            <th>Phone Type</th>
-            <th>Data State</th>
-            <th>Software Version</th>
-            <th>Sim State</th>
-            <th>Sim Operations</th>
-            <th>Sim Serial Number</th>
-            <th>Subscriber ID</th>
-            <th>Wifi State</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for row in range(count) %}
-        <tr>
-            {% for item in range(14) %}
-            <td>{{ dev[row][item] }}</td>
+    {% block content %}
+    <div class="col-sm-12  table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr class="active">
+                <th>Instance ID</th>
+                <th>Device</th>
+                <th>Model</th>
+                <th>Product</th>
+                <th>Brand</th>
+                <th>ID</th>
+                <th>Phone Type</th>
+                <!--<th>Data State</th>
+                <th>Software Version</th>
+                <th>Sim State</th>
+                <th>Sim Operations</th>
+                <th>Sim Serial Number</th>
+                <th>Subscriber ID</th>
+                <th>Wifi State</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in range(count) %}
+            <tr>
+                {% for item in range(14) %}
+                <td>{{ dev[row][item] }}</td>
+                {% endfor %}
+            </tr>
             {% endfor %}
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-</div>
-{% endblock %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}
 
+
+</div>
