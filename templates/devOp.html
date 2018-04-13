@@ -62,7 +62,7 @@ Eagle Eye | device operations
                     <form>
                         <div class="form-group col-sm-3" id="senderDev">
                             <label for="selectDev">Select Device : </label>
-                            <select class="form-control" id="selectDev">
+                            <select class="form-control" id="selectDev" name="sendsms">
                                 {% for row in range(count) %}
                                 <option>{{ devsId[row][0] }}</option>
                                 {% endfor %}
@@ -74,7 +74,7 @@ Eagle Eye | device operations
                         </div>
                         <div class="form-group col-sm-5" id="messageIn">
                             <label for="message">Message : </label>
-                            <textarea class="form-control" id="message" rows="7"></textarea>
+                            <textarea class="form-control" id="message" rows="7" name="message"></textarea>
                             <br>
                             <input type="submit" class="btn btn-primary" value="SEND">
                         </div>
@@ -87,7 +87,7 @@ Eagle Eye | device operations
                     <form>
                         <div class="form-group col-sm-3" id="senderDev2">
                             <label for="selectDev">Select Device : </label>
-                            <select class="form-control" id="selectDev2">
+                            <select class="form-control" id="selectDev2" name="writeCallLog">
                                 {% for row in range(count) %}
                                 <option>{{ devsId[row][0] }}</option>
                                 {% endfor %}
