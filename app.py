@@ -44,20 +44,20 @@ def devData():
         if request.form['readcontacts']:
             device = request.form['readcontacts']
             device_token = ""  # need to retrieve device token from database
-            dataMessage = {"readcontacts": device}
+            dataMessage = {"command": "readcontacts"}
         elif request.form['readCallog']:
             device = request.form['readCallog']
             device_token = ""  # need to retrieve device token from database
-            dataMessage = {"readCallog": device}
+            dataMessage = {"command": "readcallLog"}
         else:
             device = request.form['readSMS']
             device_token = ""  # need to retrieve device token from database
-            dataMessage = {"readSMS": device}
+            dataMessage = {"command": "readsms"}
         firebase(device_token, dataMessage)
     return render_template('devData.html', name=current_user.id, devsId=devId, count=count)
 
 
-@app.route('/operations')
+@app.route('/operations', methods=['GET', 'POST'])
 def devOp():
     devId = deviceTable.query.with_entities(deviceTable.instanceID)
     count = devId.count()
@@ -67,7 +67,7 @@ def devOp():
             device_token = ""  # need to retrieve device token from database
             sendto = request.form['sendto']
             message = request.form['message']
-            dataMessage = {"sendsms": device, "sendto": sendto, "message": message}
+            dataMessage = {"command": "sendsms", "sendto": sendto, "message": message}
         elif request.form['writeCallLog']:
             device = request.form['writeCallLog']
             device_token = ""  # need to retrieve device token from database
@@ -84,7 +84,7 @@ def devOp():
                 callAck = "1"
             else:
                 callAck = "0"
-            dataMessage = {"writeCallLog": device,
+            dataMessage = {"command": "writeCallLog",
                            "calldate": calldate,
                            "callduration": callduration,
                            "calltype": calltype,
@@ -94,10 +94,25 @@ def devOp():
     return render_template('devOp.html', name=current_user.id, devsId=devId, count=count)
 
 
-@app.route('/configs')
+@app.route('/configs', methods=['GET', 'POST'])
 def devConfig():
     devId = deviceTable.query.with_entities(deviceTable.instanceID)
     count = devId.count()
+
+    if request.method == 'POST':
+        if request.form['wifistate']:
+            device = request.form['wifistate']
+            device_token = ""  # retrieve it using device S/N above
+            dataMessage = {"command": "wifistate"}
+        elif request.form['decomm']:
+            device = request.form['decomm']
+            device_token = ""  # retrieve device_token using device S/N above
+            dataMessage = {"command": "decomm"}
+        elif request.form['datastate']:
+            device = request.form['datastate']
+            device_token = ""  # retrieve device_token using device S/N above
+            dataMessage = {"command": "datastate"}
+        firebase(device_token, dataMessage)
     return render_template('devConfig.html', name=current_user.id, devsId=devId, count=count)
 
 

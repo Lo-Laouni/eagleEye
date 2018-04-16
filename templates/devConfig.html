@@ -45,39 +45,52 @@ Eagle Eye | device Configs
 {% block content %}
 <div class="container-fluid">
     <div class="config col-sm-4" id="wifistate">
-        <h2>Wifi State</h2>
-        <label for="sel3">Select device:</label>
-        <select class="form-control" id="sel3">
-            {% for row in range(count) %}
-            <option>{{ devsId[row][0] }}</option>
-            {% endfor %}
-        </select>
-        <br>
-        <input type="button" class="btn btn-primary" value="Check">
+        <form>
+            <div class="form-group">
+                <h2>Wifi State</h2>
+                <label for="sel3">Select device:</label>
+                <select class="form-control" id="sel3" name="wifistate">
+                    {% for row in range(count) %}
+                    <option>{{ devsId[row][0] }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <input type="submit" class="btn btn-primary" value="Check">
+            </div>
+        </form>
+
     </div>
     <div class="col-sm-1"></div>
     <div class="config col-sm-3" id="decomm">
-        <h2>Decommission</h2>
-        <label for="sel2">Select device:</label>
-        <select class="form-control" id="sel2">
-            {% for row in range(count) %}
-            <option>{{ devsId[row][0] }}</option>
-            {% endfor %}
-        </select>
-        <br>
-        <input type="button" class="btn btn-primary" value="Decommission">
+        <form>
+            <div class="form-group">
+                <h2>Decommission</h2>
+                <label for="sel2">Select device:</label>
+                <select class="form-control" id="sel2" name="decomm">
+                    {% for row in range(count) %}
+                    <option>{{ devsId[row][0] }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <input type="submit" class="btn btn-primary" value="Decommission">
+            </div>
+        </form>
     </div>
     <div class="col-sm-1"></div>
     <div class="config col-sm-3" id="datastate">
-         <h2>Wifi State</h2>
-        <label for="sel1">Select device:</label>
-        <select class="form-control" id="sel1">
-            {% for row in range(count) %}
-            <option>{{ devsId[row][0] }}</option>
-            {% endfor %}
-        </select>
-        <br>
-        <input type="button" class="btn btn-primary" value="Check">
+        <form>
+            <div class="form-group">
+                <h2>Data State</h2>
+                <label for="sel1">Select device:</label>
+                <select class="form-control" id="sel1" name="datastate">
+                    {% for row in range(count) %}
+                    <option>{{ devsId[row][0] }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <input type="submit" class="btn btn-primary" value="Check">
+            </div>
+        </form>
     </div>
 </div>
 {% endblock %}
